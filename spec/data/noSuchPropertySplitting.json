@@ -16,7 +16,9 @@
   "config": {
     "splitter": "users[*].emails[*]"
   },
-  "results": [
-    [ "error", "The given splitting expression \"users[*].emails[*]\" is invalid: there is no such property!" ]
-  ]
+  "results": {
+    "errors": [
+      ["error", "The given splitting expression \"users[*].emails[*]\" is invalid: the property \"emails\" doesn't exist!"]
+    ]
+  }
 }

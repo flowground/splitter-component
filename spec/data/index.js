@@ -7,5 +7,6 @@ module.exports = {
     'should split array of arrays of primitives userNames[*]': require('./arrayOfArraysOfPrimitives.json'),
     'should emit only "end" with empty array userNames[*]': require('./nothingToSplit.json'),
     'should emit error no such property users[*].emails[*]': require('./noSuchPropertySplitting.json'),
-    'should emit error no [*] was in splitting expression': require('./splittingLvlLessThanZero.json')
+    'should emit error no [*] was in splitting expression': require('./splittingLvlLessThanZero.json'),
+    'should emit array of primitives userNames[*]': require('./arrayOfPrimitives.json')
 };

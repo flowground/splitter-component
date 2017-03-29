@@ -1,10 +1,7 @@
 {
   "message": {
     "body": {
-      "userNames":[
-        [ "John", "Mike" ],
-        [ "Anna", "Monica" ]
-      ]
+      "userNames":["John", "Mike", "Anna", "Monica"]
     }
   },
   "config": {

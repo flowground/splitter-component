@@ -129,7 +129,11 @@ function checkSplitting(body, splitting, splittingLevel) {
         }
         i++;
     }
-    return result;
+    let property = (i === path.length) ? path[i - 1] : path[i];
+    return {
+        validSplitting: result,
+        property
+    };
 }
 
 function processAction(msg, conf) {
@@ -140,7 +144,7 @@ function processAction(msg, conf) {
     debug('Config: %j', conf);
 
     const splittingLevel = getSplittingLevel(splitting);
-    const validSplitting = checkSplitting(body, splitting, splittingLevel);
+    const { validSplitting, property } = checkSplitting(body, splitting, splittingLevel);
     if (splittingLevel > 0 && isArrayKey(splitting)) {
         if (validSplitting) {
             body = splitMessage(body, splitting, splittingLevel);
@@ -152,7 +156,7 @@ function processAction(msg, conf) {
             this.emit('end');
         } else {
             this.emit('error',
-                `The given splitting expression "${splitting}" is invalid: there is no such property!`);
+                `The given splitting expression "${splitting}" is invalid: the property "${property}" doesn't exist!`);
         }
     } else {
         this.emit('error',
