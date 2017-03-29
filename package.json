@@ -1,0 +1,32 @@
+{
+  "name": "@elasticio/splitter",
+  "version": "0.0.1",
+  "description": "elastic.io component for splitting incoming messages",
+  "scripts": {
+    "test": "mocha spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:elasticio/petstore-component-nodejs.git"
+  },
+  "author": "elastic.io GmbH",
+  "license": "BSD-2-Clause",
+  "engines": {
+    "node": "6.4.0"
+  },
+  "dependencies": {
+    "co": "4.6.0",
+    "debug": "^2.6.3",
+    "elasticio-node": "0.0.7",
+    "elasticio-sailor-nodejs": "2.0.1",
+    "lodash": "^4.17.4",
+    "request": "2.76.0",
+    "request-promise": "4.1.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.18.0",
+    "mocha": "^3.2.0",
+    "sinon": "^2.1.0"
+  }
+}

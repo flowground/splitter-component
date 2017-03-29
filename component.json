@@ -1,0 +1,15 @@
+{
+  "title": "Splitter",
+  "description": "Component used to split incoming message",
+  "fields": {
+    "splitter":{
+      "viewClass": "TextFieldView"
+    }
+  },
+  "actions": {
+    "split":{
+      "title": "Splitter",
+      "main": "./split.js"
+    }
+  }
+}

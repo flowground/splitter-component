@@ -1,0 +1,13 @@
+{
+  "message": {
+    "body": {
+      "userNames":[]
+    }
+  },
+  "config": {
+    "splitter": "userNames[*]"
+  },
+  "results": [
+    [ "end" ]
+  ]
+}

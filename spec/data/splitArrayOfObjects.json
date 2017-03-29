@@ -1,0 +1,39 @@
+{
+  "message": {
+    "body": {
+      "usersCount": 2,
+      "users": [
+        {
+          "name": "John"
+        },
+        {
+          "name": "Mike"
+        }
+      ]
+    }
+  },
+  "config": {
+    "splitter": "users[*]"
+  },
+  "results": [
+    [
+      "data",
+      {
+        "usersCount": 2,
+        "users":{
+          "name": "John"
+        }
+      }
+    ],
+    [
+      "data",
+      {
+        "usersCount": 2,
+        "users":{
+          "name": "Mike"
+        }
+      }
+    ],
+    [ "end" ]
+  ]
+}

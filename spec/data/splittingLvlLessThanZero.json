@@ -1,0 +1,22 @@
+{
+  "message": {
+    "body": {
+      "users":[
+        {
+          "name": "Mike",
+          "friends": [ "Michael", "Monica", "Anna" ]
+        },
+        {
+          "name": "John",
+          "friends": [ "George", "Logan" ]
+        }
+      ]
+    }
+  },
+  "config": {
+    "splitter": "users"
+  },
+  "results": [
+    [ "error", "Splitting level must be bigger than 0" ]
+  ]
+}
