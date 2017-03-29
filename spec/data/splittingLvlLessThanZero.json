@@ -17,6 +17,6 @@
     "splitter": "users"
   },
   "results": [
-    [ "error", "Splitting level must be bigger than 0" ]
+    [ "error", "The given splitting expression \"users\" is invalid: splitting level must be bigger than 0" ]
   ]
 }
