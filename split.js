@@ -10,9 +10,11 @@ const MANY = '[*]';
 function getSplittingLevel(splitting) {
     let depth = 0;
     let arrays = splitting.match(/\[\*\]/g);
+
     if (!arrays) {
         return;
     }
+
     if (arrays.length > depth) {
         depth = arrays.length;
     }
@@ -55,6 +57,7 @@ function doSplit(path, root, index) {
     if (index === path.length) {
         return [root];
     }
+
     // Resulting array
     let currentPath = path.slice(0, index + 1);
     // Getting value on the path
@@ -63,32 +66,36 @@ function doSplit(path, root, index) {
         // Can't find next value along the path
         // will just return latest value
         return root;
-    } else if (!Array.isArray(array)) {
+    }
+
+    if (!Array.isArray(array)) {
         // Apparently next value along the path
         // is not an array, so we just going one
         // step further along the path
         return doSplit(path, root, index + 1);
-    } else {
-        let results = [];
-        // We have a value and it's an Array
-        array.forEach((arrayValue) => {
-            // Clone root
-            let result = clone(root);
-            // Replace array with one of it's values
-            _.set(result, currentPath, clone(arrayValue));
-            // Do next iteration and store results
-            let nextResult = doSplit(path, result, index + 1);
-            if (nextResult) {
-                results = results.concat(nextResult);
-            }
-        });
-        return results;
     }
+
+    let results = [];
+    // We have a value and it's an Array
+    array.forEach((arrayValue) => {
+        // Clone root
+        let result = clone(root);
+        // Replace array with one of it's values
+        _.set(result, currentPath, clone(arrayValue));
+        // Do next iteration and store results
+        let nextResult = doSplit(path, result, index + 1);
+        if (nextResult) {
+            results = results.concat(nextResult);
+        }
+    });
+
+    return results;
 }
 
 function cutByMaxSplittingLevel(path, splittingLevel) {
     let counter = 0;
     let result = [];
+
     path.forEach((node) => {
         if (isArrayKey(node)) {
             counter++;
@@ -99,17 +106,21 @@ function cutByMaxSplittingLevel(path, splittingLevel) {
             result.push(node);
         }
     });
+
     return result;
 }
 
 function splitMessage(message, splitting, splittingLevel) {
     let loopPath = splitting.split('.');
-    let results = [];
     loopPath = cutByMaxSplittingLevel(loopPath, splittingLevel);
+
+    let results = [];
     let res = doSplit(loopPath, message);
+
     res.forEach((root) => {
         results = results.concat(doSplit(loopPath, root));
     });
+
     return results;
 }
 
@@ -117,8 +128,10 @@ function splitMessage(message, splitting, splittingLevel) {
 function checkSplitting(body, splitting, splittingLevel) {
     const pathChunks = splitting.split('.');
     const path = cutByMaxSplittingLevel(pathChunks, splittingLevel);
+
     let result = body;
     let i = 0;
+
     while (i < path.length && result) {
         if (_.isArray(result)) {
             result = result[0][path[i]];
@@ -129,13 +142,16 @@ function checkSplitting(body, splitting, splittingLevel) {
         }
         i++;
     }
+
     let property = (i === path.length) ? path[i - 1] : path[i];
+
     return {
         validSplitting: result,
         property
     };
 }
 
+/** @this processAction */
 function processAction(msg, conf) {
     const splitting = conf.splitter || {};
     let body = msg.body || {};
@@ -145,24 +161,27 @@ function processAction(msg, conf) {
 
     const splittingLevel = getSplittingLevel(splitting);
     const { validSplitting, property } = checkSplitting(body, splitting, splittingLevel);
-    if (splittingLevel > 0 && isArrayKey(splitting)) {
-        if (validSplitting) {
-            body = splitMessage(body, splitting, splittingLevel);
-            body.forEach((elem) => {
-                this.emit('data',{
-                    body: elem
-                });
-            });
-            this.emit('end');
-        } else {
-            this.emit('error', new Error(
-                `The given splitting expression "${splitting}" is invalid: the property "${property}" doesn't exist!`
-            ));
-        }
-    } else {
+
+    if (splittingLevel <= 0 || !isArrayKey(splitting)) {
         this.emit('error', new Error(
-            `The given splitting expression "${splitting}" is invalid: splitting level must be bigger than 0`
-            ));
+            `The splitting expression "${splitting}" should contain at least one "[*]"`
+        ));
+        return;
     }
+
+    if (!validSplitting) {
+        this.emit('error', new Error(
+            `The splitting expression "${splitting}": the property "${property}" doesn't exist!`
+        ));
+        return;
+    }
+
+    body = splitMessage(body, splitting, splittingLevel);
+    body.forEach((elem) => {
+        this.emit('data',{
+            body: elem
+        });
+    });
+    this.emit('end');
 }
 exports.process = processAction;
