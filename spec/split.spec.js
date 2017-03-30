@@ -29,8 +29,15 @@ describe('Splitter ', () => {
                     continue;
                 }
 
-                const actual = args[1].body
-                    || (args[1] instanceof Error && args[1].message);
+                let actual = expectedEventType === 'data'
+                    ? args[1].body
+                    : args[1];
+
+                if (expectedEventType === 'error') {
+                    expect(actual).instanceOf(Error);
+                    actual = actual.message;
+                }
+
                 expect(actual).to.deep.equal(expected);
             }
         });
