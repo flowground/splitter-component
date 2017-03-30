@@ -155,12 +155,14 @@ function processAction(msg, conf) {
             });
             this.emit('end');
         } else {
-            this.emit('error',
-                `The given splitting expression "${splitting}" is invalid: the property "${property}" doesn't exist!`);
+            this.emit('error', new Error(
+                `The given splitting expression "${splitting}" is invalid: the property "${property}" doesn't exist!`
+            ));
         }
     } else {
-        this.emit('error',
-            `The given splitting expression "${splitting}" is invalid: splitting level must be bigger than 0`);
+        this.emit('error', new Error(
+            `The given splitting expression "${splitting}" is invalid: splitting level must be bigger than 0`
+            ));
     }
 }
 exports.process = processAction;

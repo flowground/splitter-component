@@ -7,33 +7,31 @@
   "config": {
     "splitter": "userNames[*]"
   },
-  "results": {
-    "messages": [
-      [
-        "data",
-        {
-          "userNames":"John"
-        }
-      ],
-      [
-        "data",
-        {
-          "userNames":"Mike"
-        }
-      ],
-      [
-        "data",
-        {
-          "userNames":"Anna"
-        }
-      ],
-      [
-        "data",
-        {
-          "userNames":"Monica"
-        }
-      ],
-      [ "end" ]
-    ]
-  }
+  "results": [
+    [
+      "data",
+      {
+        "userNames":"John"
+      }
+    ],
+    [
+      "data",
+      {
+        "userNames":"Mike"
+      }
+    ],
+    [
+      "data",
+      {
+        "userNames":"Anna"
+      }
+    ],
+    [
+      "data",
+      {
+        "userNames":"Monica"
+      }
+    ],
+    [ "end" ]
+  ]
 }

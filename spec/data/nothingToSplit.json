@@ -7,9 +7,7 @@
   "config": {
     "splitter": "userNames[*]"
   },
-  "results": {
-    "messages": [
-      [ "end" ]
-    ]
-  }
+  "results": [
+    [ "end" ]
+  ]
 }

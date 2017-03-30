@@ -16,9 +16,7 @@
   "config": {
     "splitter": "users"
   },
-  "results": {
-    "errors": [
-      ["error", "The given splitting expression \"users\" is invalid: splitting level must be bigger than 0"]
-    ]
-  }
+  "results": [
+    ["error", "The given splitting expression \"users\" is invalid: splitting level must be bigger than 0"]
+  ]
 }

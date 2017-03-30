@@ -16,23 +16,22 @@ describe('Splitter ', () => {
     for (const key of Object.keys(data)) {
         it(key, () => {
             const { message, config, results } = data[key];
-            const { messages, errors } = results;
             splitter.process.call(self, message, config);
-            if (messages) {
-                expect(self.emit.callCount).to.equal(messages.length);
-                for (let i = 0; i < messages.length; i++) {
-                    expect(self.emit.getCall(i).args[0]).to.equal(messages[i][0]);
-                    if (messages[i][1]) {
-                        expect(self.emit.getCall(i).args[1].body).to.deep.equal(messages[i][1]);
-                    }
+            for (let i = 0; i < results.length; i++) {
+                const args = self.emit.getCall(i).args;
+
+                const expectedEventType = results[i][0];
+                const actualEventType = args[0];
+                expect(actualEventType).to.equal(expectedEventType);
+
+                const expected = results[i][1];
+                if (!expected) {
+                    continue;
                 }
-            }
-            if (errors) {
-                expect(self.emit.callCount).to.equal(errors.length);
-                for (let i = 0; i < errors.length; i++) {
-                    expect(self.emit.getCall(i).args[0]).to.equal(errors[i][0]);
-                    expect(self.emit.getCall(i).args[1]).to.equal(errors[i][1]);
-                }
+
+                const actual = args[1].body
+                    || (args[1] instanceof Error && args[1].message);
+                expect(actual).to.deep.equal(expected);
             }
         });
     }
