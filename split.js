@@ -7,7 +7,7 @@ const MANY = '[*]';
  * Returns count of splits
  * For example if input is {property: "v1[*].v15[*].v2"} returns 2
  * @param splitting is a string representing a splitting expression
- * @return Number
+ * @returns Number
  */
 function getSplittingLevel(splitting) {
     let depth = 0;
@@ -26,7 +26,8 @@ function getSplittingLevel(splitting) {
 /**
  * Checks if variable key representing array
  * For example if input is 'v1[*]' return true
- * @return Boolean
+ * @param key
+ * @returns Boolean
  */
 function isArrayKey(key) {
     return typeof key !== 'number' && key.indexOf(MANY) > 0;
@@ -35,7 +36,8 @@ function isArrayKey(key) {
 /**
  * Convert string to simple key
  * For example if input is 'v1[*]' returns 'v1'
- * @return string
+ * @param key
+ * @returns String
  */
 function toSingleKey(key) {
     return key.substr(0, key.lastIndexOf(MANY));
@@ -107,7 +109,9 @@ function doSplit(path, root, index) {
 /* Returns array which represents a path
  * For example if input is ['v1[*]','v2']
  * with splitting lvl 1 returns ['v1', 'v2']
- * @return Array
+ * @param path is array
+ * @param splittingLevel is a count of splits
+ * @returns Array
  */
 function cutByMaxSplittingLevel(path, splittingLevel) {
     let counter = 0;
@@ -148,7 +152,7 @@ function splitMessage(message, splitting, splittingLevel) {
  * @param body is plain object
  * @param splitting is a string representing a splitting expression
  * @param splittingLevel is a number that means count of splits
- * @return string
+ * @returns {String|undefined}
  */
 function findMissingProperty(body, splitting, splittingLevel) {
     const pathChunks = splitting.split('.');
