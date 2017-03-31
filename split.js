@@ -14,7 +14,7 @@ function getSplittingLevel(splitting) {
     let arrays = splitting.match(/\[\*\]/g);
 
     if (!arrays) {
-        return;
+        return depth;
     }
 
     if (arrays.length > depth) {
@@ -212,5 +212,4 @@ exports.process = processAction;
 exports._getSplittingLevel = getSplittingLevel;
 exports._cutByMaxSplittingValue = cutByMaxSplittingLevel;
 exports._findMissingProperty = findMissingProperty;
-exports._doSplit = doSplit;
 exports._splitMessage = splitMessage;

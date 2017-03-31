@@ -17,7 +17,7 @@ describe('Splitter', () => {
         });
 
         it('should return undefined to users', () => {
-            expect(splitter._getSplittingLevel('users')).to.be.an('undefined');
+            expect(splitter._getSplittingLevel('users')).to.equal(0);
         });
 
     });
