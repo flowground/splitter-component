@@ -1,0 +1,40 @@
+{
+  "message": {
+    "body": {
+      "userNames":[
+        [ "John", "Mike" ],
+        [ "Anna", "Monica" ]
+      ]
+    }
+  },
+  "config": {
+    "splitter": "userNames[*]"
+  },
+  "results": [
+    [
+      "data",
+      {
+        "userNames":"John"
+      }
+    ],
+    [
+      "data",
+      {
+        "userNames":"Mike"
+      }
+    ],
+    [
+      "data",
+      {
+        "userNames":"Anna"
+      }
+    ],
+    [
+      "data",
+      {
+        "userNames":"Monica"
+      }
+    ],
+    [ "end" ]
+    ]
+}

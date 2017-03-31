@@ -1,0 +1,23 @@
+{
+  "message": {
+    "body": {
+      "users":[
+        {
+          "name": "Mike",
+          "friends": [ "Michael", "Monica", "Anna" ]
+        },
+        {
+          "name": "John",
+          "friends": [ "George", "Logan" ]
+        }
+      ]
+    }
+  },
+  "config": {
+    "splitter": "users[*].emails[*]"
+  },
+  "results": [
+      ["error",
+        "The splitting expression \"users[*].emails[*]\": the property \"emails\" doesn't exist!"]
+    ]
+}
