@@ -3,8 +3,10 @@ const debug = require('debug')('splitter');
 const _ = require('lodash');
 const MANY = '[*]';
 
-/* Returns count of splits
+/**
+ * Returns count of splits
  * For example if input is {property: "v1[*].v15[*].v2"} returns 2
+ * @param splitting is a string representing a splitting expression
  * @return Number
  */
 function getSplittingLevel(splitting) {
@@ -21,10 +23,20 @@ function getSplittingLevel(splitting) {
     return depth;
 }
 
+/**
+ * Checks if variable key representing array
+ * For example if input is 'v1[*]' return true
+ * @return Boolean
+ */
 function isArrayKey(key) {
     return typeof key !== 'number' && key.indexOf(MANY) > 0;
 }
 
+/**
+ * Convert string to simple key
+ * For example if input is 'v1[*]' returns 'v1'
+ * @return string
+ */
 function toSingleKey(key) {
     return key.substr(0, key.lastIndexOf(MANY));
 }
@@ -92,6 +104,11 @@ function doSplit(path, root, index) {
     return results;
 }
 
+/* Returns array which represents a path
+ * For example if input is ['v1[*]','v2']
+ * with splitting lvl 1 returns ['v1', 'v2']
+ * @return Array
+ */
 function cutByMaxSplittingLevel(path, splittingLevel) {
     let counter = 0;
     let result = [];
@@ -110,6 +127,7 @@ function cutByMaxSplittingLevel(path, splittingLevel) {
     return result;
 }
 
+
 function splitMessage(message, splitting, splittingLevel) {
     let loopPath = splitting.split('.');
     loopPath = cutByMaxSplittingLevel(loopPath, splittingLevel);
@@ -124,31 +142,37 @@ function splitMessage(message, splitting, splittingLevel) {
     return results;
 }
 
-
-function checkSplitting(body, splitting, splittingLevel) {
+/**
+ * Returns missing property if splitting has it but object doesn't
+ * Returns undefined if all properties in splitting are valid
+ * @param body is plain object
+ * @param splitting is a string representing a splitting expression
+ * @param splittingLevel is a number that means count of splits
+ * @return string
+ */
+function findMissingProperty(body, splitting, splittingLevel) {
     const pathChunks = splitting.split('.');
     const path = cutByMaxSplittingLevel(pathChunks, splittingLevel);
 
     let result = body;
     let i = 0;
 
+    let property;
     while (i < path.length && result) {
+        property = path[i];
         if (_.isArray(result)) {
-            result = result[0][path[i]];
+            result = result[0][property];
         } else if (_.isPlainObject(result)) {
-            result = result[path[i]];
+            result = result[property];
         } else {
             break;
         }
         i++;
     }
 
-    let property = (i === path.length) ? path[i - 1] : path[i];
-
-    return {
-        validSplitting: result,
-        property
-    };
+    if (!result) {
+        return property;
+    }
 }
 
 /** @this processAction */
@@ -160,7 +184,7 @@ function processAction(msg, conf) {
     debug('Config: %j', conf);
 
     const splittingLevel = getSplittingLevel(splitting);
-    const { validSplitting, property } = checkSplitting(body, splitting, splittingLevel);
+    const property = findMissingProperty(body, splitting, splittingLevel);
 
     if (splittingLevel <= 0 || !isArrayKey(splitting)) {
         this.emit('error', new Error(
@@ -169,7 +193,7 @@ function processAction(msg, conf) {
         return;
     }
 
-    if (!validSplitting) {
+    if (property) {
         this.emit('error', new Error(
             `The splitting expression "${splitting}": the property "${property}" doesn't exist!`
         ));
@@ -185,3 +209,8 @@ function processAction(msg, conf) {
     this.emit('end');
 }
 exports.process = processAction;
+exports._getSplittingLevel = getSplittingLevel;
+exports._cutByMaxSplittingValue = cutByMaxSplittingLevel;
+exports._findMissingProperty = findMissingProperty;
+exports._doSplit = doSplit;
+exports._splitMessage = splitMessage;

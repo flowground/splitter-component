@@ -1,0 +1,12 @@
+{
+  "body": {
+    "users": [
+      {
+        "name": "John"
+      }
+    ]
+  },
+  "splitting": "users[*].profile.name",
+  "splittingLevel": 1,
+  "result": "profile"
+}

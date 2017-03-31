@@ -1,0 +1,12 @@
+{
+  "body": {
+    "users": [
+      {
+        "name": "John"
+      }
+    ]
+  },
+  "splitting": "users[*].surname",
+  "splittingLevel": 1,
+  "result": "surname"
+}
