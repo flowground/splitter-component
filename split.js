@@ -171,6 +171,11 @@ function findMissingProperty(body, splitting, splittingLevel) {
         } else {
             break;
         }
+
+        if (result && !_.isArray(result)) {
+            debug(`"${property}" property in the splitting expression is not an array. Returning the original object`);
+        }
+
         i++;
     }
 
