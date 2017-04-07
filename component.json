@@ -3,7 +3,8 @@
   "description": "Component used to split incoming message",
   "fields": {
     "splitter":{
-      "viewClass": "SelectPropertyView"
+      "viewClass": "SelectPropertyView",
+      "required": true
     }
   },
   "actions": {
