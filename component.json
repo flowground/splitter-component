@@ -4,11 +4,11 @@
   "actions": {
     "split":{
       "title": "Split Message By Array",
-      "description": "Splits a message into multiple messages using the given separator. The separator is a path to a property inside the message. If the property is an array, the message is split and multiple messages are emitted. Otherwise the original message is emitted.",
+      "description": "Splits a message into multiple messages using a given separator. The separator is treated as a path to a property inside the message. If the property is an array, the message is split and multiple messages are emitted. Otherwise the original message is emitted.",
       "main": "./split.js",
       "fields": {
         "splitter":{
-          "title": "Split Property",
+          "label": "Split Property",
           "viewClass": "SelectPropertyView",
           "required": true
         }
