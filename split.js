@@ -1,6 +1,7 @@
 'use strict';
 const debug = require('debug')('splitter');
 const _ = require('lodash');
+const messages = require('elasticio-node').messages;
 const MANY = '[*]';
 
 /**
@@ -215,9 +216,7 @@ function processAction(msg, conf) {
 
     body = splitMessage(body, splitting, splittingLevel);
     body.forEach((elem) => {
-        this.emit('data',{
-            body: elem
-        });
+        this.emit('data', messages.newMessageWithBody(elem));
     });
     this.emit('end');
 }
