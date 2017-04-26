@@ -22,12 +22,19 @@ function processAction(msg, conf) {
 
     if (_.isArray(split)) {
         split.forEach(elem => result.push(elem));
-    } else {
+    } else if (_.isObject(split)) {
         result.push(split);
+    } else {
+        result.push({
+            value: split
+        });
     }
 
-    result.forEach((elem) => {
-        this.emit('data', messages.newMessageWithBody(elem));
+    result.forEach(elem => {
+        const body = _.isObject(elem) ? elem : {
+            value: elem
+        };
+        this.emit('data', messages.newMessageWithBody(body));
     });
     this.emit('end');
 }

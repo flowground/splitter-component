@@ -10,19 +10,27 @@
   "results": [
     [
       "data",
-      "John"
+      {
+        "value": "John"
+      }
     ],
     [
       "data",
-      "Mike"
+      {
+        "value": "Mike"
+      }
     ],
     [
       "data",
-      "Anna"
+      {
+        "value": "Anna"
+      }
     ],
     [
       "data",
-      "Monica"
+      {
+        "value": "Monica"
+      }
     ],
     [ "end" ]
   ]

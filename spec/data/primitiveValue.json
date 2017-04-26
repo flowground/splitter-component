@@ -1,0 +1,17 @@
+{
+  "message": {
+    "body": {
+      "users": "value"
+    }
+  },
+  "config": {
+    "splitter": "users"
+  },
+  "results": [
+    ["data",
+      {
+        "value": "value"
+      }],
+    ["end"]
+  ]
+}

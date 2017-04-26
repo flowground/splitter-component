@@ -1,0 +1,19 @@
+{
+  "message": {
+    "body": {
+      "users": {
+        "name": "John"
+      }
+    }
+  },
+  "config": {
+    "splitter": "users"
+  },
+  "results": [
+    ["data",
+      {
+        "name": "John"
+      }],
+    ["end"]
+  ]
+}
