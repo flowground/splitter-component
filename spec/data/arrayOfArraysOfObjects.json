@@ -41,6 +41,6 @@
   },
   "results": [
     ["error",
-    "The splitting expression \"users.friends\": found array \"friends\" but already has one \"users\"!"]
+    "Could not find properties by following path: \"users.friends\"!"]
   ]
 }

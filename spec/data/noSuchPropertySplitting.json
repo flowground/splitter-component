@@ -18,6 +18,6 @@
   },
   "results": [
       ["error",
-        "The splitting expression \"users.emails\": the property \"emails\" doesn't exist!"]
+        "Could not find properties by following path: \"users.emails\"!"]
     ]
 }
