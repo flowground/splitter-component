@@ -1,5 +1,5 @@
 {
-  "splitting": "users[*]",
+  "splitting": "users",
   "splittingLevel": 1,
   "body": {
     "users": [

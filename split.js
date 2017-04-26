@@ -2,58 +2,6 @@
 const debug = require('debug')('splitter');
 const _ = require('lodash');
 const messages = require('elasticio-node').messages;
-const MANY = '[*]';
-
-/**
- * Returns count of splits
- * For example if input is {property: "v1[*].v15[*].v2"} returns 2
- * @param splitting is a string representing a splitting expression
- * @returns Number
- */
-function getSplittingLevel(splitting) {
-    let depth = 0;
-    let arrays = splitting.match(/\[\*\]/g);
-
-    if (!arrays) {
-        return depth;
-    }
-
-    if (arrays.length > depth) {
-        depth = arrays.length;
-    }
-    return depth;
-}
-
-/**
- * Checks if variable key representing array
- * For example if input is 'v1[*]' return true
- * @param key
- * @returns Boolean
- */
-function isArrayKey(key) {
-    return typeof key !== 'number' && key.indexOf(MANY) > 0;
-}
-
-/**
- * Convert string to simple key
- * For example if input is 'v1[*]' returns 'v1'
- * @param key
- * @returns String
- */
-function toSingleKey(key) {
-    return key.substr(0, key.lastIndexOf(MANY));
-}
-
-/**
- * Special clone function that do the deep clone of the data
- * NOTE: all functions that were part of the object data will be lost
- *
- * @param a
- * @returns {*}
- */
-function clone(a) {
-    return JSON.parse(JSON.stringify(a));
-}
 
 /**
  * This function will do the multiplication of the values
@@ -87,7 +35,7 @@ function doSplit(path, root, index) {
         // Apparently next value along the path
         // is not an array, so we just going one
         // step further along the path
-        return doSplit(path, root, index + 1);
+        return doSplit(path, array, index + 1);
     }
 
     let results = [];
@@ -109,36 +57,9 @@ function doSplit(path, root, index) {
     return results;
 }
 
-/* Returns array which represents a path
- * For example if input is ['v1[*]','v2']
- * with splitting lvl 1 returns ['v1', 'v2']
- * @param path is array
- * @param splittingLevel is a count of splits
- * @returns Array
- */
-function cutByMaxSplittingLevel(path, splittingLevel) {
-    let counter = 0;
-    let result = [];
-
-    path.forEach((node) => {
-        if (isArrayKey(node)) {
-            counter++;
-            if (counter <= splittingLevel) {
-                result.push(toSingleKey(node));
-            }
-        } else {
-            result.push(node);
-        }
-    });
-
-    return result;
-}
-
-
-function splitMessage(message, splitting, splittingLevel) {
+function splitMessage(message, splitting) {
 
     let loopPath = splitting.split('.');
-    loopPath = cutByMaxSplittingLevel(loopPath, splittingLevel);
 
 
     let results = [];
@@ -156,12 +77,11 @@ function splitMessage(message, splitting, splittingLevel) {
  * Returns undefined if all properties in splitting are valid
  * @param body is plain object
  * @param splitting is a string representing a splitting expression
- * @param splittingLevel is a number that means count of splits
  * @returns {String|undefined}
  */
-function findMissingProperty(body, splitting, splittingLevel) {
-    const pathChunks = splitting.split('.');
-    const path = cutByMaxSplittingLevel(pathChunks, splittingLevel);
+function findMissingProperty(body, splitting) {
+
+    const path = splitting.split('.');
 
     let result = body;
     let i = 0;
@@ -197,15 +117,7 @@ function processAction(msg, conf) {
     debug('Received new message with body: %j', body);
     debug('Config: %j', conf);
 
-    const splittingLevel = getSplittingLevel(splitting);
-    const property = findMissingProperty(body, splitting, splittingLevel);
-
-    if (splittingLevel <= 0 || !isArrayKey(splitting)) {
-        this.emit('error', new Error(
-            `The splitting expression "${splitting}" should contain at least one "[*]"`
-        ));
-        return;
-    }
+    const property = findMissingProperty(body, splitting);
 
     if (property) {
         this.emit('error', new Error(
@@ -214,14 +126,12 @@ function processAction(msg, conf) {
         return;
     }
 
-    body = splitMessage(body, splitting, splittingLevel);
+    body = splitMessage(body, splitting);
     body.forEach((elem) => {
         this.emit('data', messages.newMessageWithBody(elem));
     });
     this.emit('end');
 }
 exports.process = processAction;
-exports._getSplittingLevel = getSplittingLevel;
-exports._cutByMaxSplittingValue = cutByMaxSplittingLevel;
 exports._findMissingProperty = findMissingProperty;
 exports._splitMessage = splitMessage;

@@ -1,5 +1,5 @@
 {
-  "splitting": "users.friends",
+  "splitting": "users.friends.name",
   "body": {
     "users": [
       {
@@ -26,18 +26,5 @@
       }
     ]
   },
-  "results": [
-    {
-      "name": "Mike"
-    },
-    {
-      "name": "Monica"
-    },
-    {
-      "name": "Anna"
-    },
-    {
-      "name": "George"
-    }
-  ]
+  "results": ["Mike", "Monica", "Anna", "George"]
 }

@@ -6,7 +6,7 @@
       }
     ]
   },
-  "splitting": "users[*].surname",
+  "splitting": "users.surname",
   "splittingLevel": 1,
   "result": "surname"
 }

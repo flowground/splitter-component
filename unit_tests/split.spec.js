@@ -6,44 +6,14 @@ const splitMessage = require('./data/splitMessage');
 
 describe('Splitter', () => {
 
-    describe('getSplittingLevel', () => {
-
-        it('should return 2 to users[*].friends[*]', () => {
-            expect(splitter._getSplittingLevel('users[*].friends[*]')).to.equal(2);
-        });
-
-        it('should return 1 to users[*]', () => {
-            expect(splitter._getSplittingLevel('users[*]')).to.equal(1);
-        });
-
-        it('should return undefined to users', () => {
-            expect(splitter._getSplittingLevel('users')).to.equal(0);
-        });
-
-    });
-
-    describe('cutByMaxSplittingValue', () => {
-
-        it('should return "[ users, friends ]" to users[*].name', () => {
-            expect(splitter._cutByMaxSplittingValue(['users[*]','name'], 1))
-                .to.deep.equal(['users','name']);
-        });
-
-        it('should return "[ users, friends ]" to users[*].friends[*].name', () => {
-            expect(splitter._cutByMaxSplittingValue(['users[*]','friends[*]','name'], 2))
-                .to.deep.equal(['users','friends', 'name']);
-        });
-
-    });
-
     describe('findMissingProperty', () => {
 
         for (const key of Object.keys(findMissingProperty)) {
             it(key, () => {
-                const { body, result: expectedResult, splitting, splittingLevel }
+                const { body, result: expectedResult, splitting }
                 = findMissingProperty[key];
 
-                expect(splitter._findMissingProperty(body, splitting, splittingLevel))
+                expect(splitter._findMissingProperty(body, splitting))
                     .to.equal(expectedResult);
             });
         }
@@ -54,9 +24,9 @@ describe('Splitter', () => {
 
         for (const key of Object.keys(splitMessage)) {
             it(key, () => {
-                const { body, splitting, results: expectedResults, splittingLevel } = splitMessage[key];
+                const { body, splitting, results: expectedResults } = splitMessage[key];
 
-                let actualResults = splitter._splitMessage(body, splitting, splittingLevel);
+                let actualResults = splitter._splitMessage(body, splitting);
 
                 expect(actualResults).to.have.lengthOf(expectedResults.length);
 

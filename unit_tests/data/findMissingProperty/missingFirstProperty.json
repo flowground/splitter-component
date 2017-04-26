@@ -6,7 +6,6 @@
       }
     ]
   },
-  "splitting": "members[*].profile.name",
-  "splittingLevel": 1,
+  "splitting": "members.profile.name",
   "result": "members"
 }

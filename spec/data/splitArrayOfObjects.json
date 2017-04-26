@@ -13,7 +13,7 @@
     }
   },
   "config": {
-    "splitter": "users[*]"
+    "splitter": "users"
   },
   "results": [
     [
