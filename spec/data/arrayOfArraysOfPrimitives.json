@@ -13,20 +13,12 @@
   "results": [
     [
       "data",
-      "John"
+      ["John", "Mike"]
     ],
     [
       "data",
-      "Mike"
-    ],
-    [
-      "data",
-      "Anna"
-    ],
-    [
-      "data",
-      "Monica"
+      ["Anna", "Monica"]
     ],
     [ "end" ]
-    ]
+  ]
 }

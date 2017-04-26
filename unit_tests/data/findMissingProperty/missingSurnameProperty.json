@@ -7,5 +7,5 @@
     ]
   },
   "splitting": "users.surname",
-  "result": "surname"
+  "result": "The splitting expression \"users.surname\": the property \"surname\" doesn't exist!"
 }

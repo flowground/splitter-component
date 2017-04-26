@@ -18,26 +18,6 @@
     "splitter": "users.friends"
   },
   "results": [
-    [
-      "data",
-      "George"
-    ],
-    [
-      "data",
-      "Logan"
-    ],
-    [
-      "data",
-      "Michael"
-    ],
-    [
-      "data",
-      "Monica"
-    ],
-    [
-      "data",
-      "Anna"
-    ],
-    [ "end" ]
+    ["error", "The splitting expression \"users.friends\": found array \"friends\" but already has one \"users\"!"]
   ]
 }

@@ -7,5 +7,5 @@
     ]
   },
   "splitting": "users.profile.name",
-  "result": "profile"
+  "result": "The splitting expression \"users.profile.name\": the property \"profile\" doesn't exist!"
 }

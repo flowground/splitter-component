@@ -40,41 +40,7 @@
     "splitter": "users.friends"
   },
   "results": [
-    [
-      "data",
-      {
-        "name":"George",
-        "friendsCount": 30
-      }
-    ],
-    [
-      "data",
-      {
-        "name":"Logan",
-        "friendsCount": 100
-      }
-    ],
-    [
-      "data",
-      {
-        "name":"Michael",
-        "friendsCount": 35
-      }
-    ],
-    [
-      "data",
-      {
-        "name":"Monica",
-        "friendsCount": 220
-      }
-    ],
-    [
-      "data",
-      {
-        "name":"Anna",
-        "friendsCount": 400
-      }
-    ],
-    [ "end" ]
+    ["error",
+    "The splitting expression \"users.friends\": found array \"friends\" but already has one \"users\"!"]
   ]
 }
