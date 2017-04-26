@@ -7,6 +7,5 @@
     ]
   },
   "splitting": "users.profile.name",
-  "splittingLevel": 1,
   "result": "profile"
 }
