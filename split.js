@@ -33,6 +33,7 @@ function processAction(msg, conf) {
     if (_.isArray(split)) {
         split.forEach(elem => result.push(elem));
     } else if (_.isObject(split)) {
+        debug('Result is not an array. Returning the original object');
         result.push(split);
     }
 
