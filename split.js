@@ -18,23 +18,26 @@ function processAction(msg, conf) {
         return;
     }
 
+    if (!_.isObject(split)) {
+        this.emit('error', new Error('Only objects are accepted!'));
+        return;
+    }
+
+    if (_.isArray(split) && _.find(split, elem => !_.isObject(elem))) {
+        this.emit('error', new Error('Splitting arrays of objects only!'));
+        return;
+    }
+
     const result = [];
 
     if (_.isArray(split)) {
         split.forEach(elem => result.push(elem));
     } else if (_.isObject(split)) {
         result.push(split);
-    } else {
-        result.push({
-            value: split
-        });
     }
 
     result.forEach(elem => {
-        const body = _.isObject(elem) ? elem : {
-            value: elem
-        };
-        this.emit('data', messages.newMessageWithBody(body));
+        this.emit('data', messages.newMessageWithBody(elem));
     });
     this.emit('end');
 }

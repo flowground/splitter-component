@@ -9,29 +9,8 @@
   },
   "results": [
     [
-      "data",
-      {
-        "value": "John"
-      }
-    ],
-    [
-      "data",
-      {
-        "value": "Mike"
-      }
-    ],
-    [
-      "data",
-      {
-        "value": "Anna"
-      }
-    ],
-    [
-      "data",
-      {
-        "value": "Monica"
-      }
-    ],
-    [ "end" ]
+      "error",
+      "Splitting arrays of objects only!"
+    ]
   ]
 }

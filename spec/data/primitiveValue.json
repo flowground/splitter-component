@@ -8,10 +8,9 @@
     "splitter": "users"
   },
   "results": [
-    ["data",
-      {
-        "value": "value"
-      }],
-    ["end"]
+    [
+      "error",
+      "Only objects are accepted!"
+    ]
   ]
 }
