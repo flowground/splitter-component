@@ -13,25 +13,19 @@
     }
   },
   "config": {
-    "splitter": "users[*]"
+    "splitter": "users"
   },
   "results": [
     [
       "data",
       {
-        "usersCount": 2,
-        "users":{
-          "name": "John"
-        }
+        "name": "John"
       }
     ],
     [
       "data",
       {
-        "usersCount": 2,
-        "users":{
-          "name": "Mike"
-        }
+        "name": "Mike"
       }
     ],
     [ "end" ]

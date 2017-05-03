@@ -5,33 +5,12 @@
     }
   },
   "config": {
-    "splitter": "userNames[*]"
+    "splitter": "userNames"
   },
   "results": [
     [
-      "data",
-      {
-        "userNames":"John"
-      }
-    ],
-    [
-      "data",
-      {
-        "userNames":"Mike"
-      }
-    ],
-    [
-      "data",
-      {
-        "userNames":"Anna"
-      }
-    ],
-    [
-      "data",
-      {
-        "userNames":"Monica"
-      }
-    ],
-    [ "end" ]
+      "error",
+      "Splitting arrays of objects only!"
+    ]
   ]
 }

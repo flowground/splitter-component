@@ -15,59 +15,9 @@
     }
   },
   "config": {
-    "splitter": "users[*].friends[*]"
+    "splitter": "users.friends"
   },
   "results": [
-    [
-      "data",
-      {
-        "usersCount": 2,
-        "users":{
-          "name": "John",
-          "friends": "George"
-        }
-      }
-    ],
-    [
-      "data",
-      {
-        "usersCount": 2,
-        "users":{
-          "name": "John",
-          "friends": "Logan"
-        }
-      }
-    ],
-    [
-      "data",
-      {
-        "usersCount": 2,
-        "users":{
-          "name": "Mike",
-          "friends": "Michael"
-        }
-      }
-    ],
-    [
-      "data",
-      {
-        "usersCount": 2,
-        "users":{
-          "name": "Mike",
-          "friends": "Monica"
-        }
-      }
-    ],
-    [
-      "data",
-      {
-        "usersCount": 2,
-        "users":{
-          "name": "Mike",
-          "friends": "Anna"
-        }
-      }
-    ],
-    [ "end" ]
+    ["error", "Could not find properties by following path: \"users.friends\"!"]
   ]
 }

@@ -5,7 +5,7 @@
     }
   },
   "config": {
-    "splitter": "userNames[*]"
+    "splitter": "userNames"
   },
   "results": [
     [ "end" ]

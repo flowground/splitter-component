@@ -8,33 +8,17 @@
     }
   },
   "config": {
-    "splitter": "userNames[*]"
+    "splitter": "userNames"
   },
   "results": [
     [
       "data",
-      {
-        "userNames":"John"
-      }
+      ["John", "Mike"]
     ],
     [
       "data",
-      {
-        "userNames":"Mike"
-      }
-    ],
-    [
-      "data",
-      {
-        "userNames":"Anna"
-      }
-    ],
-    [
-      "data",
-      {
-        "userNames":"Monica"
-      }
+      ["Anna", "Monica"]
     ],
     [ "end" ]
-    ]
+  ]
 }
