@@ -15,7 +15,6 @@
     "node": "6.4.0"
   },
   "dependencies": {
-    "co": "4.6.0",
     "debug": "^2.6.3",
     "elasticio-node": "0.0.8",
     "elasticio-sailor-nodejs": "2.1.0",
