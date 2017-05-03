@@ -19,85 +19,18 @@ For example, we have our body that looks like this:
     ]
 }
 ```
-Our splitting expression is "users[*]". As the output of the component we'll have two objects:
+Our splitting expression is "users". As the output of the component we'll have two objects:
 ```
 {
-    "users": {
-        "name": "John"
-    }
+    "name": "John"
 }
 
 {
-    "users": {
-        "name": "Mike"
-    }
+    "name": "Mike"
 }
 ```
 
-Also component can split with more complicated expressions. For example, if we have splitting expression "users[\*].friends[*]" and our body looks like this:
-```
-{
-    "users": [
-        {
-            "name": "John",
-            "friends": [
-                {
-                    "name": "Michael"
-                },
-                {
-                    "name": "Anna"
-                }
-            ]
-        },
-        {
-            "name": "Mike",
-            "friends": [
-                {
-                    "name": "George"
-                },
-                {
-                    "name": "Monica"
-                }
-            ]
-        }
-    ]
-}
-```
-As the output of the component we'll have four objects:
-```
-{
-    "users": {
-        "name": "John",
-        "friends": {
-            "name": "Michael"
-        }
-    }
-}
+If splitting expression refers to object splitter just return this object.
 
-{
-    "users": {
-        "name": "John",
-        "friends": {
-            "name": "Anna"
-        }
-    }
-}
-
-{
-    "users": {
-        "name": "Mike",
-        "friends": {
-            "name": "George"
-        }
-    }
-}
-
-{
-    "users": {
-        "name": "Mike",
-        "friends": {
-            "name": "Monica"
-        }
-    }
-}
-```
+If splitting expression contains primitive value like ```users:"John"```
+or array of primitives like ```users:["John", "Mike", "Anna"]``` splitter emits error.
