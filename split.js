@@ -11,7 +11,7 @@ function processAction(msg, conf) {
     debug('Received new message with body: %j', body);
     debug('Config: %j', conf);
 
-    const split = _.get(body, splitting);
+    const split = splitting === '$' ? body : _.get(body, splitting);
 
     if (!split) {
         this.emit('error', new Error(`Could not find properties by following path: "${splitting}"!`));
