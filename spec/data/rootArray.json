@@ -1,0 +1,30 @@
+{
+  "message": {
+    "body": [
+      {
+        "one": 1
+      },
+      {
+        "two": 2
+      }
+    ]
+  },
+  "config": {
+    "splitter": "$"
+  },
+  "results": [
+    [
+      "data",
+      {
+        "one": 1
+      }
+    ],
+    [
+      "data",
+      {
+        "two": 2
+      }
+    ],
+    [ "end" ]
+  ]
+}
