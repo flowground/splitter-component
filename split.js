@@ -37,6 +37,7 @@ async function processAction(msg, conf) {
         result.push(split);
     }
 
+    debug('%s parts to emit found', result.length);
     result.forEach(async elem => {
         await this.emit('data', messages.newMessageWithBody(elem));
     });
