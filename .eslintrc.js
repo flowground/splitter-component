@@ -12,6 +12,9 @@ module.exports = {
         jasmine: true,
         mocha: true
     },
+    "parserOptions": {
+        "ecmaVersion": 8
+    },
     'extends': 'eslint:recommended',
     'rules': {
         'indent': [
