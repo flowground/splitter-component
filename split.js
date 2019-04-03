@@ -38,9 +38,11 @@ async function processAction(msg, conf) {
     }
 
     debug('%s parts to emit found', result.length);
-    result.forEach(async elem => {
-        await this.emit('data', messages.newMessageWithBody(elem));
-    });
+    for (let value of result) {
+        if (value) {
+            await this.emit('data', messages.newMessageWithBody(value));
+        }
+    }
     await this.emit('end');
 }
 
