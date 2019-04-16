@@ -1,6 +1,10 @@
 # splitter-component
 Splitter component for the elastic.io platform
 
+## Environment variables
+
+Component does not has any required environment variables, but we suggest to use `EIO_REQUIRED_RAM_MB` in order to avoid `Component run out of memory and terminated` error, recommended value of allocated memory is `512` MB.
+
 ## Actions
 
 ### Split
