@@ -1,16 +1,18 @@
 # splitter-component
-Splitter component for the elastic.io platform
+Splitter is the basic component for the [elastic.io platform](http://www.elastic.io).
 
-## Environment variables
+## Description
+The Splitter processes income messages containing multiple elements that might have to be processed in different ways. The Splitter emits out the composite message into individual messages, each containing data related to one item.
 
-Component does not has any required environment variables, but we suggest to use `EIO_REQUIRED_RAM_MB` in order to avoid `Component run out of memory and terminated` error, recommended value of allocated memory is `512` MB.
+#### Environment variables 
+Component does not have any required environment variables, but we suggest to use `EIO_REQUIRED_RAM_MB` in order to avoid `Component run out of memory and terminated` error, recommended value of allocated memory is `512` MB.
 
 ## Actions
+### Split Message By Array
+Splits a message into multiple messages using a given separator. The separator is treated as a path to a property inside the message. A message is split when a property is an array and emitted are multiple messages. Otherwise the original message is emitted.
 
-### Split
+For example, we have a message:
 
-Splits incoming message using splitting expression. Message has property body that contains object to split.
-For example, we have our body that looks like this:
 ```
 {
     "users": [
@@ -23,7 +25,8 @@ For example, we have our body that looks like this:
     ]
 }
 ```
-Our splitting expression is "users". As the output of the component we'll have two objects:
+
+The splitting expression is "users", action will return output:
 ```
 {
     "name": "John"
@@ -33,8 +36,17 @@ Our splitting expression is "users". As the output of the component we'll have t
     "name": "Mike"
 }
 ```
+*Notes:*
 
-If splitting expression refers to object splitter just return this object.
+- *When splitting expression refers to an object splitter returns this object;*
+- *When splitting expression contains primitive value like ```users:"John"``` or array of primitives like ```users:["John", "Mike", "Anna"]``` splitter emits error.*
 
-If splitting expression contains primitive value like ```users:"John"```
-or array of primitives like ```users:["John", "Mike", "Anna"]``` splitter emits error.
+#### List of Expected Config fields
+```Split Property``` - use this field to choose a separator.
+
+## Known limitations (common for the component)
+No.
+
+## Documentation links
+More information and some examples can be found here: [Splitter documentation](https://www.elastic.io/connectors/splitter-integration/)
+and here: [Array splitting and JSONata mapper](https://support.elastic.io/support/solutions/articles/14000069604-array-splitting-and-jsonata-mapper)
