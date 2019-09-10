@@ -2,15 +2,27 @@
   "title": "Splitter",
   "description": "Splits a message into multiple messages.",
   "actions": {
-    "split":{
+    "split": {
       "title": "Split Message By Array",
       "description": "Splits a message into multiple messages using a given separator. The separator is treated as a path to a property inside the message. If the property is an array, the message is split and multiple messages are emitted. Otherwise the original message is emitted.",
       "main": "./split.js",
       "fields": {
-        "splitter":{
+        "splitter": {
           "label": "Split Property",
           "viewClass": "SelectPropertyView",
           "required": true
+        }
+      }
+    },
+    "splitOnJsonataExpression": {
+      "title": "Split on JSONata Expression",
+      "description": "Evaluates the input based on a JSONata expression. Assuming the evaluation is an array, the array is split and emitted to multiple messages.",
+      "main": "./lib/actions/splitOnJsonata.js",
+      "fields": {
+        "expression": {
+          "label": "JSONata Expression",
+          "required": true,
+          "viewClass": "JSONataView"
         }
       }
     }
