@@ -1,0 +1,15 @@
+{
+  "message": {
+    "body": {
+      "usernames": []
+    }
+  },
+  "config": {
+    "expression": "usernames"
+  },
+  "results": [
+    [
+      "end"
+    ]
+  ]
+}

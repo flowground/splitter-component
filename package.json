@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "elastic.io component for splitting incoming messages",
   "scripts": {
-    "test": "mocha unit_tests spec/split"
+    "test": "mocha unit_tests spec/split spec/splitOnJsonata"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,83 @@
+{
+  "message": {
+    "body": {
+      "usersCount": 2,
+      "users": [
+        {
+          "name": "John",
+          "friends": [
+            {
+              "name":"George",
+              "friendsCount": 30
+            },
+            {
+              "name":"Logan",
+              "friendsCount": 100
+            }
+          ]
+        },
+        {
+          "name": "Mike",
+          "friends": [
+            {
+              "name":"Michael",
+              "friendsCount": 35
+            },
+            {
+              "name":"Monica",
+              "friendsCount": 220
+            },
+            {
+              "name":"Anna",
+              "friendsCount": 400
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "config": {
+    "expression": "users"
+  },
+  "results": [
+    [
+      "data",
+      {
+        "name": "John",
+        "friends": [
+          {
+            "name":"George",
+            "friendsCount": 30
+          },
+          {
+            "name":"Logan",
+            "friendsCount": 100
+          }
+        ]
+      }
+    ],
+    [
+      "data",
+      {
+        "name": "Mike",
+        "friends": [
+          {
+            "name":"Michael",
+            "friendsCount": 35
+          },
+          {
+            "name":"Monica",
+            "friendsCount": 220
+          },
+          {
+            "name":"Anna",
+            "friendsCount": 400
+          }
+        ]
+      }
+    ],
+    [
+      "end"
+    ]
+  ]
+}
