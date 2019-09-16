@@ -12,11 +12,11 @@ describe('Split on JSONata ', () => {
         };
     });
 
-    for (const key of Object.keys(data)) {
+    Object.keys(data).forEach((key) => {
         it(key, async () => {
             const { message, config, results } = data[key];
             await splitter.process.call(self, message, config);
-            for (let i = 0; i < results.length; i++) {
+            for (let i = 0; i < results.length; i += 1) {
                 const { args } = self.emit.getCall(i);
 
                 const expectedEventType = results[i][0];
@@ -24,21 +24,19 @@ describe('Split on JSONata ', () => {
                 expect(actualEventType).to.equal(expectedEventType);
 
                 const expected = results[i][1];
-                if (!expected) {
-                    continue;
+                if (expected) {
+                    let actual = expectedEventType === 'data'
+                        ? args[1].body
+                        : args[1];
+
+                    if (expectedEventType === 'error') {
+                        expect(actual).instanceOf(Error);
+                        actual = actual.message;
+                    }
+
+                    expect(actual).to.deep.equal(expected);
                 }
-
-                let actual = expectedEventType === 'data'
-                    ? args[1].body
-                    : args[1];
-
-                if (expectedEventType === 'error') {
-                    expect(actual).instanceOf(Error);
-                    actual = actual.message;
-                }
-
-                expect(actual).to.deep.equal(expected);
             }
         });
-    }
+    });
 });

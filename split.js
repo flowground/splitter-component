@@ -27,21 +27,21 @@ async function processAction(msg, conf) {
         return;
     }
 
-    const result = [];
+    const results = [];
 
     if (_.isArray(split)) {
-        split.forEach((elem) => result.push(elem));
+        split.forEach((elem) => results.push(elem));
     } else if (_.isObject(split)) {
         debug(`"${splitting}" is not an array. Returning the original object`);
-        result.push(split);
+        results.push(split);
     }
 
-    debug('%s parts to emit found', result.length);
-    for (const value of result) {
-        if (value) {
-            await this.emit('data', messages.newMessageWithBody(value));
+    debug('%s parts to emit found', results.length);
+    results.forEach(async (result) => {
+        if (result) {
+            await this.emit('data', messages.newMessageWithBody(result));
         }
-    }
+    });
     await this.emit('end');
 }
 
