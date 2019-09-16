@@ -1,9 +1,9 @@
 {
   "name": "@elasticio/splitter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "elastic.io component for splitting incoming messages",
   "scripts": {
-    "test": "mocha unit_tests spec"
+    "test": "mocha unit_tests spec/split spec/splitOnJsonata"
   },
   "repository": {
     "type": "git",
@@ -15,6 +15,7 @@
     "node": ">=10.15.0"
   },
   "dependencies": {
+    "@elastic.io/component-commons-library": "0.0.4",
     "debug": "^2.6.3",
     "elasticio-node": "0.0.9",
     "elasticio-sailor-nodejs": "2.2.3",

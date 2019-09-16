@@ -1,0 +1,21 @@
+{
+  "message": {
+    "body": {
+      "usernames": [
+        "John",
+        "Mike",
+        "Anna",
+        "Monica"
+      ]
+    }
+  },
+  "config": {
+    "expression": "usernames"
+  },
+  "results": [
+    [
+      "error",
+      "Splitting arrays of objects only!"
+    ]
+  ]
+}

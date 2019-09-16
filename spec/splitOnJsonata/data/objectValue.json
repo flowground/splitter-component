@@ -1,0 +1,18 @@
+{
+  "message": {
+    "body": {
+      "users": {
+        "name": "John"
+      }
+    }
+  },
+  "config": {
+    "expression": "users"
+  },
+  "results": [
+    [
+      "error",
+      "The evaluated expression must be an array."
+    ]
+  ]
+}

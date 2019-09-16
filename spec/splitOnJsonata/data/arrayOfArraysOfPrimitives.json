@@ -1,0 +1,38 @@
+{
+  "message": {
+    "body": {
+      "usernames": [
+        [
+          "John",
+          "Mike"
+        ],
+        [
+          "Anna",
+          "Monica"
+        ]
+      ]
+    }
+  },
+  "config": {
+    "expression": "usernames"
+  },
+  "results": [
+    [
+      "data",
+      [
+        "John",
+        "Mike"
+      ]
+    ],
+    [
+      "data",
+      [
+        "Anna",
+        "Monica"
+      ]
+    ],
+    [
+      "end"
+    ]
+  ]
+}

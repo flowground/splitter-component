@@ -1,10 +1,10 @@
 'use strict';
 const expect = require('chai').expect;
 const sinon = require('sinon');
-const splitter = require('../split.js');
+const splitter = require('../../lib/actions/splitOnJsonata');
 const data = require('./data');
 
-describe('Splitter ', () => {
+describe('Split on JSONata ', () => {
     let self;
 
     beforeEach(() => {
