@@ -1,5 +1,4 @@
-'use strict';
-const expect = require('chai').expect;
+const { expect } = require('chai');
 const sinon = require('sinon');
 const splitter = require('../../split.js');
 const data = require('./data');
@@ -9,7 +8,7 @@ describe('Splitter ', () => {
 
     beforeEach(() => {
         self = {
-            emit: sinon.spy()
+            emit: sinon.spy(),
         };
     });
 
@@ -18,7 +17,7 @@ describe('Splitter ', () => {
             const { message, config, results } = data[key];
             await splitter.process.call(self, message, config);
             for (let i = 0; i < results.length; i++) {
-                const args = self.emit.getCall(i).args;
+                const { args } = self.emit.getCall(i);
 
                 const expectedEventType = results[i][0];
                 const actualEventType = args[0];

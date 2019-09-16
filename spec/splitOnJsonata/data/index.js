@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
     'should split array from an array constructor expression': require('./arrayConstructors.json'),
     'should split array of arrays of objects users.friends': require('./arrayOfArraysOfObjects.json'),
@@ -12,5 +10,5 @@ module.exports = {
     'should split array from a range query expression': require('./objectConstructors.json'),
     'should split root array': require('./rootArray.json'),
     'should split array of arrays': require('./splitArrayOfArrays.json'),
-    'should split array of objects users': require('./splitArrayOfObjects.json')
+    'should split array of objects users': require('./splitArrayOfObjects.json'),
 };

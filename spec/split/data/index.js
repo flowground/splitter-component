@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
     'should split array of objects users': require('./splitArrayOfObjects.json'),
     'should split array of arrays users.friends': require('./splitArrayOfArrays.json'),
@@ -10,5 +8,5 @@ module.exports = {
     'should emit error no such property users.emails': require('./noSuchPropertySplitting.json'),
     'should emit error for array of primitives userNames': require('./arrayOfPrimitives.json'),
     'should emit error when users is primitive': require('./primitiveValue.json'),
-    'should emit object when users is object': require('./objectValue.json')
+    'should emit object when users is object': require('./objectValue.json'),
 };
