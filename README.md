@@ -9,6 +9,8 @@ Component does not have any required environment variables, but we suggest to us
 
 ## Actions
 ### Split Message By Array
+**This action is deprecated, please use Split on JSONata Expression instead.**
+
 Splits a message into multiple messages using a given separator. The separator is treated as a path to a property inside the message. A message is split when a property is an array and emitted are multiple messages. Otherwise the original message is emitted.
 
 For example, we have a message:
