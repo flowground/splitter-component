@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/elasticio/splitter-component/tree/master.svg?style=svg)](https://circleci.com/gh/elasticio/splitter-component/tree/master)
 # splitter-component
 Splitter is the basic component for the [elastic.io platform](http://www.elastic.io).
 
