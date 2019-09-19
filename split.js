@@ -1,12 +1,11 @@
-'use strict';
 const debug = require('debug')('splitter');
 const _ = require('lodash');
-const messages = require('elasticio-node').messages;
+const { messages } = require('elasticio-node');
 
 /** @this processAction */
 async function processAction(msg, conf) {
     const splitting = conf.splitter || {};
-    let body = msg.body || {};
+    const body = msg.body || {};
 
     debug('Received new message with body: %j', body);
     debug('Config: %j', conf);
@@ -23,26 +22,26 @@ async function processAction(msg, conf) {
         return;
     }
 
-    if (_.isArray(split) && _.find(split, elem => !_.isObject(elem))) {
+    if (_.isArray(split) && _.find(split, (elem) => !_.isObject(elem))) {
         await this.emit('error', new Error('Splitting arrays of objects only!'));
         return;
     }
 
-    const result = [];
+    const results = [];
 
     if (_.isArray(split)) {
-        split.forEach(elem => result.push(elem));
+        split.forEach((elem) => results.push(elem));
     } else if (_.isObject(split)) {
         debug(`"${splitting}" is not an array. Returning the original object`);
-        result.push(split);
+        results.push(split);
     }
 
-    debug('%s parts to emit found', result.length);
-    for (let value of result) {
-        if (value) {
-            await this.emit('data', messages.newMessageWithBody(value));
+    debug('%s parts to emit found', results.length);
+    results.forEach(async (result) => {
+        if (result) {
+            await this.emit('data', messages.newMessageWithBody(result));
         }
-    }
+    });
     await this.emit('end');
 }
 
