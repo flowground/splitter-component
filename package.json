@@ -23,6 +23,7 @@
     "lodash": "4.17.4"
   },
   "devDependencies": {
+    "@elastic.io/component-logger": "0.0.1",
     "chai": "3.5.0",
     "eslint": "6.4.0",
     "eslint-config-airbnb-base": "14.0.0",
