@@ -1,3 +1,8 @@
+## 1.0.1 (December 07, 2019)
+
+* Update sailor version to 2.5.1
+* Change build type to docker
+
 ## 1.0.2 (September 18, 2019)
 
 * Initial release

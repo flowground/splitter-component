@@ -1,5 +1,6 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
+const logger = require('@elastic.io/component-logger')();
 const splitter = require('../../lib/actions/splitOnJsonata');
 const data = require('./data');
 
@@ -9,6 +10,7 @@ describe('Split on JSONata ', () => {
     beforeEach(() => {
         self = {
             emit: sinon.spy(),
+            logger,
         };
     });
 
