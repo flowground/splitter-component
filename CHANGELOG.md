@@ -1,3 +1,8 @@
+## 1.0.2 (Januar 13, 2020)
+
+* Using Sailor logger
+* Improved few logs
+
 ## 1.0.1 (December 07, 2019)
 
 * Update sailor version to 2.5.1
