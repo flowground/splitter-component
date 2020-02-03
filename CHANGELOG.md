@@ -1,3 +1,7 @@
+## 1.0.4 (February 03, 2020)
+
+* Fixed bug with incorrect await while emitting data
+
 ## 1.0.3 (December 24, 2019)
 
 * Update sailor version to 2.5.4
