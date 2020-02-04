@@ -18,7 +18,7 @@
   "dependencies": {
     "@elastic.io/component-commons-library": "0.0.7",
     "elasticio-node": "0.0.9",
-    "elasticio-sailor-nodejs": "2.6.3",
+    "elasticio-sailor-nodejs": "2.6.2",
     "lodash": "4.17.15"
   },
   "devDependencies": {
@@ -27,7 +27,7 @@
     "eslint": "6.4.0",
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-plugin-import": "2.18.2",
-    "mocha": "3.2.0",
+    "mocha": "7.0.1",
     "sinon": "2.1.0"
   }
 }
