@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:elasticio/petstore-component-nodejs.git"
+    "url": "git@github.com:elasticio/splitter-component.git"
   },
   "author": "elastic.io GmbH",
   "license": "BSD-2-Clause",
