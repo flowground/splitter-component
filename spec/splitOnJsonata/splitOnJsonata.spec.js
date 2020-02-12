@@ -18,6 +18,9 @@ describe('Split on JSONata ', () => {
         it(key, async () => {
             const { message, config, results } = data[key];
             await splitter.process.call(self, message, config);
+            if (!results.length) {
+                expect(self.emit.getCalls().length).equal(0);
+            }
             for (let i = 0; i < results.length; i += 1) {
                 const { args } = self.emit.getCall(i);
 
