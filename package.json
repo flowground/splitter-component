@@ -1,6 +1,6 @@
 {
   "name": "@elasticio/splitter",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "elastic.io component for splitting incoming messages",
   "scripts": {
     "pretest": "eslint split.js lib spec --fix",
@@ -18,7 +18,7 @@
   "dependencies": {
     "@elastic.io/component-commons-library": "0.0.7",
     "elasticio-node": "0.0.9",
-    "elasticio-sailor-nodejs": "2.6.2",
+    "elasticio-sailor-nodejs": "2.6.5",
     "lodash": "4.17.15"
   },
   "devDependencies": {
