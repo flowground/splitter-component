@@ -1,3 +1,7 @@
+## 1.1.3 (August 11, 2020)
+* Update Sailor and dependencies.
+* Fix node version.
+
 ## 1.1.2 (June 6, 2020)
 * Remove update docs on deploy script
 
