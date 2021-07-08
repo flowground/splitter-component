@@ -30,6 +30,9 @@ describe('Split on JSONata ', () => {
     expect(self.emit.lastCall.args[1].body).to.deep.equal({
       groupSize: 1,
       groupId: 'group123',
+      messageData: {
+        msg123: undefined,
+      },
     });
   });
 
@@ -47,12 +50,24 @@ describe('Split on JSONata ', () => {
 
   it('Interleaved Case with duplicate deliveries', async () => {
     const msgBodies = [
-      { groupId: '1', groupSize: 3, messageId: '1' },
-      { groupId: '2', groupSize: 2, messageId: '1' },
-      { groupId: '2', groupSize: 2, messageId: '1' },
-      { groupId: '1', groupSize: 3, messageId: '3' },
-      { groupId: '2', groupSize: 2, messageId: '2' },
-      { groupId: '1', groupSize: 3, messageId: '2' },
+      {
+        groupId: '1', groupSize: 3, messageId: '1', messageData: '1-1',
+      },
+      {
+        groupId: '2', groupSize: 2, messageId: '1', messageData: '2-1',
+      },
+      {
+        groupId: '2', groupSize: 2, messageId: '1', messageData: '2-1',
+      },
+      {
+        groupId: '1', groupSize: 3, messageId: '3', messageData: '1-3',
+      },
+      {
+        groupId: '2', groupSize: 2, messageId: '2', messageData: '2-2',
+      },
+      {
+        groupId: '1', groupSize: 3, messageId: '2', messageData: '1-2',
+      },
     ];
 
     // eslint-disable-next-line no-plusplus
@@ -69,6 +84,10 @@ describe('Split on JSONata ', () => {
           expect(self.emit.lastCall.args[1].body).to.deep.equal({
             groupSize: 2,
             groupId: '2',
+            messageData: {
+              1: '2-1',
+              2: '2-2',
+            },
           });
           break;
         case 5:
@@ -76,9 +95,39 @@ describe('Split on JSONata ', () => {
           expect(self.emit.lastCall.args[1].body).to.deep.equal({
             groupSize: 3,
             groupId: '1',
+            messageData: {
+              1: '1-1',
+              2: '1-2',
+              3: '1-3',
+            },
           });
           break;
       }
     }
+  });
+
+  it('Base Case: Group Size is 1, messageData is provided', async () => {
+    const msg = {
+      body: {
+        groupId: 'group123',
+        messageId: 'msg123',
+        groupSize: 1,
+        messageData: {
+          id: 1,
+        },
+      },
+    };
+    await reassemble.process.call(self, msg, {});
+    // eslint-disable-next-line no-unused-expressions
+    expect(self.emit.calledOnce).to.be.true;
+    expect(self.emit.lastCall.args[1].body).to.deep.equal({
+      groupSize: 1,
+      groupId: 'group123',
+      messageData: {
+        msg123: {
+          id: 1,
+        },
+      },
+    });
   });
 });
