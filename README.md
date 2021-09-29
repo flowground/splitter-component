@@ -90,11 +90,14 @@ and the JSONata expression `Phone.{type: number}`, an object constructor, the ac
 ```Split Property``` - use this field to choose a separator.
 
 ### Re-assemble Messages 
-**(Beta)**
 
-Inverse of the split action: Given a stream of incoming messages that which have 
-been split apart by a split action (or similar), produce one message once all 
-message parts have arrived.
+Inverse of the split action: Given a stream of incoming messages a sum message is generated.
+
+#### List of Expected Config fields
+```Behavior``` - Has 3 different behaviour variants(options):
+* Produce Groups of Fixed Size (Don't Emit Partial Groups): A message is emitted once the group size is reached for the given group. If arriving messages for a particular group are less than the defined group size then the group will not be emitted.
+* Group All Incoming Messages: All incomming messages will be gathered until there are no more incoming messages at which point messages will be emitted for each group.
+* Produce Groups of Fixed Size (Emit Partial Groups): Specify both group size and delay timer. Once a group is complete, that group will be emitted. Once there are no more incoming messages, then partially completed groups will also be emitted.
 
 Supported:
 * Messages can be re-ordered in the flow
@@ -103,28 +106,28 @@ Supported:
 (e.g. Two overlapping webhook calls arrive and the flow has components where parallel processing > 1.)
 
 Limitations:
-* All groups must have one or more messages. (i.e. No groups of size 0). 
-Can't do re-grouping when a split is done on an empty array. (i.e. No empty for each pattern supported)
-* If all messages in a group fail to arrive at the re-assemble action (because one message suffered an error earlier in the flow)
-then this component will silently discard the group.
-* All messages must arrive within the same container lifetime.  
-If at any point there is more than a 15 second gap in messages, then the group will be silently discarded.  
+* All groups must have one or more messages. (i.e. No groups of size 0).
+Can't do re-grouping when a split is done on an empty array. (i.e. No empty for each pattern supported).
+If all the messages in the group do not arrive, then the group will not be emitted.
 * The group is dropped if there are any unexpected restarts to the container.
-* Size of the group must be known by all group members.
-* Messages are only emitter when all parts arrive. Emitting a message only when the first part arrives isn't supported.
+* In case only a groupSize is given and no delay timer is specified. The size of the group must be known by all group members.
+* In case of using the delay timer. Messages are only emitted when all parts arrive. Emitting a message only when the first part arrives isn't supported.
+* The delay timer can not exceed 40,000 milliseconds. If more than this maximum is given, then this maximum will be used instead.
 
 #### List of Expected Config fields
-```groupSize``` - Number of messages in the group
-
 ```groupId``` - Globally unique id for the group to distinguish it from other groups. This value needs to be the same for all messages in a group.
 
-```messageId``` - Id for a message to distinguish it from other messages in the group. 
+```messageId``` - Id for a message to distinguish it from other messages in the group.
 Must be unique per group but does not have to be globally unique. This value needs to be different for all messages in a group.
 
-```messageData``` - object for providing some data derived from the steps between splitting and re-assembling
+```messageData``` - Data from individual messages can be inserted here in form of an object. This object is then inserted into an array which is available in the message emitted for this group.
+
+```groupSize``` - Number of messages in the group.
+
+```Delay timer (in ms)``` - Time the process waits when no incoming messages before emiting (Max 40,000 milliseconds)
 
 ## Known limitations (common for the component)
-No.
+None.
 
 ## Documentation links
 More information and some examples can be found here: [Splitter documentation](https://www.elastic.io/connectors/splitter-integration/).

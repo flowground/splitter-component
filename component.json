@@ -1,6 +1,6 @@
 {
   "title": "Splitter",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Splits a message into multiple messages.",
   "buildType":"docker",
   "actions": {
@@ -42,34 +42,14 @@
         "link": "/components/splitter/index.html#re-assemble-messages"
       },
       "main": "./lib/actions/reassemble.js",
-      "fields": {},
-      "metadata": {
-        "in": {
-          "type": "object",
+      "dynamicMetadata": true,
+      "fields": {
+        "mode": {
+          "viewClass": "SelectView",
+          "label": "Behavior",
           "required": true,
-          "properties": {
-            "groupSize": {
-              "type": "number",
-              "required": true,
-              "title": "Number of messages produced by splitter"
-            },
-            "groupId": {
-              "type": "string",
-              "required": true,
-              "title": "Unique ID to describe the group"
-            },
-            "messageId": {
-              "type": "string",
-              "required": true,
-              "title": "Unique ID to describe this message"
-            },
-            "messageData": {
-              "title": "Message Data",
-              "required": false,
-              "type": "object",
-              "properties": {}
-            }
-          }
+          "model": {"groupSize": "Produce Groups of Fixed Size (Don't Emit Partial Groups)", "timeout": "Group All Incoming Messages", "groupSize&timeout": "Produce Groups of Fixed Size (Emit Partial Groups)"},
+          "prompt": "Select behavior"
         }
       }
     }
