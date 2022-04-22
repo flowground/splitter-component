@@ -1,3 +1,8 @@
+## 1.4.1 (April 08, 2022)
+* Update Sailor version to 2.6.27
+* Get rid of vulnerabilities in dependencies
+* Add component pusher job to Circle.ci config
+
 ## 1.4.0 (November 26, 2021)
 * Update `Re-assembled message` action: Make Message ID optional 
 * Update sailor version to 2.6.26

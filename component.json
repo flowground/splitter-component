@@ -1,8 +1,7 @@
 {
   "title": "Splitter",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Splits a message into multiple messages.",
-  "buildType":"docker",
   "actions": {
     "split": {
       "deprecated": true,
@@ -48,7 +47,11 @@
           "viewClass": "SelectView",
           "label": "Behavior",
           "required": true,
-          "model": {"groupSize": "Produce Groups of Fixed Size (Don't Emit Partial Groups)", "timeout": "Group All Incoming Messages", "groupSize&timeout": "Produce Groups of Fixed Size (Emit Partial Groups)"},
+          "model": {
+            "groupSize": "Produce Groups of Fixed Size (Don't Emit Partial Groups)",
+            "timeout": "Group All Incoming Messages",
+            "groupSize&timeout": "Produce Groups of Fixed Size (Emit Partial Groups)"
+          },
           "prompt": "Select behavior"
         }
       }
