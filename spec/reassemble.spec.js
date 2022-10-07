@@ -20,7 +20,6 @@ function sleep(ms) {
 
 describe('Split on JSONata ', () => {
   let self;
-
   beforeEach(() => {
     self = {
       emit: sinon.spy(),
@@ -471,7 +470,7 @@ describe('Split on JSONata ', () => {
         messages: [{
           groupId: 'c', messageData: '1-1',
         }],
-        messageIdsSeen: { },
+        messageIdsSeen: {},
       });
     nock('https://ma.estr').put('/objects/c').reply(200, {});
 
@@ -493,7 +492,7 @@ describe('Split on JSONata ', () => {
         }, {
           groupId: 'c', messageData: '1-2',
         }],
-        messageIdsSeen: { },
+        messageIdsSeen: {},
       });
     nock('https://ma.estr').put('/objects/c').reply(200, {});
     nock('https://ma.estr')
