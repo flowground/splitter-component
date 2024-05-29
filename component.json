@@ -1,7 +1,7 @@
 {
   "title": "Splitter",
   "description": "Splits a message into multiple messages.",
-  "version": "1.4.4",
+  "version": "1.5.0",
   "actions": {
     "split": {
       "deprecated": true,
@@ -48,11 +48,22 @@
           "label": "Behavior",
           "required": true,
           "model": {
-            "groupSize": "Produce Groups of Fixed Size (Don't Emit Partial Groups)",
-            "timeout": "Group All Incoming Messages",
-            "groupSize&timeout": "Produce Groups of Fixed Size (Emit Partial Groups)"
+            "groupSize": "Group on fixed amount of messages",
+            "timeout": "Group on timeout",
+            "groupSize&timeout": "Group on amount of messages or timeout"
+          },
+          "help": {
+            "description": "Options description:<br><br><b>Group on fixed amount of messages</b> - Messages keeps collecting continuously. Once the group size is reached, the group is emitted and the new group starts collecting immediately. If the number of incoming messages for a particular group is less than the defined group size, the group will be stored in the internal storage (Maester) and proceed collecting messages into the open group.<br><b>Group on timeout</b> - All incoming messages will be gathered until there are no more incoming messages within the specified timeframe (delay timer), at which point messages will be emitted for each group.<br><b>Group on amount of messages or timeout</b> - Specify both group size and delay timer. Once a group is complete, that group will be emitted. If there are no more incoming messages within the specified timeframe, partially completed groups will also be emitted."
           },
           "prompt": "Select behavior"
+        },
+        "emitAsArray": {
+          "viewClass": "CheckBoxView",
+          "label": "Emit result as array",
+          "prompt": "Select behavior",
+          "help": {
+            "description": "If selected, \"messageData\" will be array of messages without messages IDs<br><br>Example with unchecked:<br><div style=\"background-color:#E7E8EB;\">{<div style=\"margin-left:1em;\"><span style=\"color:#1d75b3;\">\"groupSize\":</span> <span style=\"color:#75438a;\">2</span>,<br><span style=\"color:#1d75b3;\">\"groupId\":</span> <span style=\"color:#b35e14;\">\"test22\"</span>,<br><span style=\"color:#1d75b3;\">\"messageData\":</span> {<div style=\"margin-left:1em;\"><span style=\"color:#1d75b3;\">\"d899b000-5455-4c7a-9781-f16203426b93\":</span> {<div style=\"margin-left:1em;\"><span style=\"color:#1d75b3;\">\"dataFromMessage\":</span> <span style=\"color:#b35e14;\">\"Message1\"</span></div>},<br><span style=\"color:#1d75b3;\">\"bdfca2b1-7aa7-444c-916d-3a2c17fc5dd6\":</span> {<div style=\"margin-left:1em;\"><span style=\"color:#1d75b3;\">\"dataFromMessage\":</span> <span style=\"color:#b35e14;\">\"Message2\"</span></div>}</div>}</div>}</div><br><br>Example with checked:<br><div style=\"background-color:#E7E8EB;\">{<div style=\"margin-left:1em;\"><span style=\"color:#1d75b3;\">\"groupSize\":</span> <span style=\"color:#75438a;\">2</span>,<br><span style=\"color:#1d75b3;\">\"groupId\":</span> <span style=\"color:#b35e14;\">\"test22\"</span>,<br><span style=\"color:#1d75b3;\">\"messageData\":</span> [<div style=\"margin-left:1em;\">{<div style=\"margin-left:1em;\"><span style=\"color:#1d75b3;\">\"dataFromMessage\":</span> <span style=\"color:#b35e14;\">\"Message1\"</span></div>},<br>{<div style=\"margin-left:1em;\"><span style=\"color:#1d75b3;\">\"dataFromMessage\":</span> <span style=\"color:#b35e14;\">\"Message2\"</span></div>}</div>]</div>}</div>"
+          }
         }
       }
     }
